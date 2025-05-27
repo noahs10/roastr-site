@@ -2,6 +2,10 @@
 @import "tw-animate-css";
 @import 'keen-slider/keen-slider.min.css';
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

@@ -47,6 +47,7 @@ export default function Home() {
       {/* Beans Section */}
       <section className="relative overflow-visible">
         {/* Header Row */}
+
         <div className="flex justify-between items-center mb-4">
           <div>
             <h2 className="text-2xl font-bold">Beans of The Month</h2>
