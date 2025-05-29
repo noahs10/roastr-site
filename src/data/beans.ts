@@ -9,7 +9,7 @@ export const beans = [
     description: "Generally Liked",
   },
   {
-    slug: "rose-nebula",
+    slug: "holy-muria",
     image: "/koeslan.png",
     roaster: "Koeslan Coffee Roastery",
     name: "The Holy Muria Natural Anaerobic",
@@ -18,7 +18,7 @@ export const beans = [
     description: "Loved by Most",
   },
   {
-    slug: "rose-nebula",
+    slug: "aceh-extended-natural",
     image: "/aceh.png",
     roaster: "People Temple Roastery",
     name: "Aceh Extended Natural",
@@ -27,7 +27,7 @@ export const beans = [
     description: "Generally Liked",
   },
   {
-    slug: "rose-nebula",
+    slug: "aceh-extended-natural",
     image: "/aceh.png",
     roaster: "People Temple Roastery",
     name: "Aceh Extended Natural",
@@ -36,7 +36,7 @@ export const beans = [
     description: "Generally Liked",
   },
   {
-    slug: "rose-nebula",
+    slug: "aceh-extended-natural",
     image: "/aceh.png",
     roaster: "People Temple Roastery",
     name: "Aceh Extended Natural",
