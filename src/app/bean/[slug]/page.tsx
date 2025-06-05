@@ -10,7 +10,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const bean = mockBeanData[params.slug as BeanSlug];
+    const { slug } = await params;
+    const bean = mockBeanData[slug as BeanSlug];
 
   if (!bean) {
     return {
@@ -29,7 +30,9 @@ export default async function BeanPage({
 }: {
   params: { slug: string };
 }) {
-  const bean = mockBeanData[params.slug as BeanSlug];
+  // const bean = mockBeanData[params.slug as BeanSlug];
+  const { slug } = await params;
+  const bean = mockBeanData[slug as BeanSlug];
 
   if (!bean) return notFound();
 

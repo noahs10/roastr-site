@@ -47,7 +47,7 @@ export const mockBeanData: Record<BeanSlug, Bean> = {
         emoji: "🤔",
         title: "Mixed feelings",
         content:
-          "Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!",
+          "Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!Bikin pakai v60 kemaren pas dateng. acidity nya bright banget dan clean cup. Rasa pomegranate nya berasa, dan floral rose nya mantep sih. rekomen!",
       },
       {
         user: "Kevin1021",
