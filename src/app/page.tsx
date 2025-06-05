@@ -9,7 +9,7 @@ import ReviewCard from "@/components/ReviewCard"
 import "keen-slider/keen-slider.min.css"
 import { useKeenSlider } from "keen-slider/react"
 import { beans } from "@/data/beans"
-import { reviews } from "@/data/reviews"
+import { mockBeanData } from "@/data/mockBeanData"
 
 //Top Beans keenSlider config
 export default function Home() {
@@ -36,6 +36,15 @@ export default function Home() {
     },
   },
   })
+
+  const reviews = Object.values(mockBeanData).flatMap((bean) =>
+    bean.reviews.map((review) => ({
+      roaster: bean.roaster,
+      bean: bean.name,
+      slug: bean.slug,
+      ...review,
+    }))
+  )
   
   return (
   <main >

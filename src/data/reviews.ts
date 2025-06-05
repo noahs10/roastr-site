@@ -2,7 +2,7 @@ export const reviews = [
   {
     roaster: "People Temple Roastery",
     bean: "Rose Nebula Yunnan Anaerobic Yeast Natural",
-    slug: "rose-nebula-yunnan", // ✅ Add slug for dynamic linking
+    slug: "rose-nebula", // ✅ Add slug for dynamic linking
     emoji: "🤔",
     title: "Mixed feelings",
     content:
@@ -12,7 +12,7 @@ export const reviews = [
   {
     roaster: "Koeslan Coffee Roastery",
     bean: "The Holy Muria Natural Anaerobic Natural",
-    slug: "holy-muria-natural", // ✅ Add slug for dynamic linking
+    slug: "holy-muria", // ✅ Add slug for dynamic linking
     emoji: "😍",
     title: "Would buy again!",
     content:
