@@ -1,8 +1,9 @@
-import { mockBeanData, Bean, Review, BeanSlug } from "@/data/mockBeanData";
+import { mockBeanData, BeanSlug } from "@/data/mockBeanData";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import BrewLogCard from "@/components/BrewLogCard";
+import type { PageProps } from "next";
 
 export async function generateStaticParams() {
   return Object.keys(mockBeanData).map((slug) => ({
@@ -10,8 +11,11 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const bean = mockBeanData[params.slug as BeanSlug];
+export async function generateMetadata(
+  { params }: PageProps<{ slug: string }>
+) {
+  const { slug } = await params
+  const bean = mockBeanData[slug as BeanSlug]
 
   if (!bean) {
     return {
@@ -25,12 +29,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: `Discover ${bean.name} by ${bean.roaster}. Real brews and reviews from the roastr community.`,
   };
 }
-export default async function BeanPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const bean = mockBeanData[params.slug as BeanSlug];
+export default async function BeanPage({ params }: PageProps<{ slug: string }>) {
+  const { slug } = await params
+  const bean = mockBeanData[slug as BeanSlug]
 
   if (!bean) return notFound();
 
