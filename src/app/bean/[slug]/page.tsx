@@ -1,7 +1,12 @@
-import { mockBeanData, Bean, Review, BeanSlug } from "@/data/mockBeanData";
+import { mockBeanData, BeanSlug } from "@/data/mockBeanData";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import BrewLogCard from "@/components/BrewLogCard";
+
+interface BeanParams {
+  slug: string;
+}
 
 export async function generateStaticParams() {
   return Object.keys(mockBeanData).map((slug) => ({
@@ -9,9 +14,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-    const { slug } = await params;
-    const bean = mockBeanData[slug as BeanSlug];
+export async function generateMetadata({ params }: { params: Promise<BeanParams> }) {
+  const { slug } = await params;
+  const bean = mockBeanData[slug as BeanSlug]
 
   if (!bean) {
     return {
@@ -25,14 +30,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: `Discover ${bean.name} by ${bean.roaster}. Real brews and reviews from the roastr community.`,
   };
 }
-export default async function BeanPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  // const bean = mockBeanData[params.slug as BeanSlug];
+
+export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
   const { slug } = await params;
-  const bean = mockBeanData[slug as BeanSlug];
+  const bean = mockBeanData[slug as BeanSlug]
+
 
   if (!bean) return notFound();
 
@@ -107,21 +109,7 @@ export default async function BeanPage({
         <h2 className="text-lg font-semibold mb-4">Top Brew Logs</h2>
         <div className="space-y-4">
           {bean.reviews.map((review, i) => (
-            <div
-              className="rounded-2xl border border-gray-200 px-5 py-4 text-left text-sm sm:text-base shadow-sm"
-            >
-              <div className="text-base flex items-center gap-2 font-semibold text-black mb-2">
-                <span>{review.emoji}</span>
-                <span>{review.title}</span>
-              </div>
-              
-              <p className="text-sm text-gray-800 leading-snug" line-clamp-3 >
-                {review.content}
-              </p>
-              <p className="text-sm text-gray-400 mt-4">
-                by <span className="font-semibold">{review.user}</span>
-              </p>
-            </div>
+            <BrewLogCard key={i} {...review} />
           ))}
         </div>
         <p className="text-center mt-6 text-sm font-medium">
