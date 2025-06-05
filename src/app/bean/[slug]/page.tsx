@@ -75,7 +75,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
         {/* Score Card */}
         <div className="bg-yellow-300 rounded-2xl py-4 px-6 text-center shadow-sm">
           <p className="text-3xl font-bold">{bean.score}</p>
-          <p className="text-sm">"{bean.description}"</p>
+          <p className="text-sm">&quot;{bean.description}&quot;</p>
           <p className="text-xs text-gray-700 mt-1 italic">({bean.ratings} ratings)</p>
         </div>
         {/* Summary */}
