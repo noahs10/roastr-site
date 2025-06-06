@@ -5,7 +5,7 @@ import React from "react"
 
 export default function HeroSection() {
   return (
-    <section className="bg-black text-white px-6 py-10 md:py-20 text-center">
+    <section id="hero-section" className="bg-black text-white px-6 py-10 md:py-20 text-center">
       {/* Logo */}
       <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">roastr</h1>
 
