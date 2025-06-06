@@ -1,9 +1,18 @@
 "use client"
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
-import React from "react"
+import React, { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function HeroSection() {
+  const router = useRouter()
+  const [query, setQuery] = useState("")
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    router.push(`/query${query ? `?q=${encodeURIComponent(query)}` : ""}`)
+  }
+
   return (
     <section id="hero-section" className="bg-black text-white px-6 py-10 md:py-20 text-center">
       {/* Logo */}
@@ -16,14 +25,16 @@ export default function HeroSection() {
       </p>
 
       {/* Search Input with Icon */}
-      <div className="relative max-w-xl mx-auto mb-6">
+      <form onSubmit={handleSubmit} className="relative max-w-xl mx-auto mb-6">
         <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" />
         <input
           type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="search beans, roasters, or flavors..."
           className="w-full pl-12 pr-5 py-3 md:py-4 rounded-full text-sm md:text-base text-black bg-white placeholder-gray-500 shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
-      </div>
+      </form>
 
       {/* Review count */}
       <p className="text-xs md:text-sm text-gray-400 mb-1">
