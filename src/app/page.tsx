@@ -100,12 +100,12 @@ export default function Home() {
       <section className="pb-10">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-semibold">Recent reviews</h2>
-          <button
+          {/* <button
           onClick={() => window.location.href = '/review'}
           className=" bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors"
           >
           ✍️  Write a review
-          </button>
+          </button> */}
         </div>
         <div className="space-y-6">
           {reviews.map((review, i) => (

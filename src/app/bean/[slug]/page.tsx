@@ -39,7 +39,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
   if (!bean) return notFound();
 
   return (
-    <main className="max-w-screen-md mx-auto px-4 sm:px-6 py-10 space-y-6">
+    <main className="max-w-screen-md mx-auto px-4 sm:px-6 py-10 space-y-6 pt-20">
       {/* Image */}
       <div className="relative h-[200px] sm:h-[300px] w-full rounded-lg border-2 border-gray-800">
         <Image

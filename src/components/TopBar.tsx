@@ -36,9 +36,9 @@ export default function TopBar() {
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="bg-white/80 backdrop-blur border-b border-gray-200">
+      <div className="bg-black backdrop-blur">
         <div className="max-w-screen-lg mx-auto px-4 py-2 flex items-center justify-between">
-          <Link href="/" className="font-bold text-lg">
+          <Link href="/" className="font-bold text-lg text-white hover:text-gray-300 transition-colors">
             roastr
           </Link>
           <div className="flex items-center gap-2">
@@ -46,11 +46,8 @@ export default function TopBar() {
               href="/review"
               className="bg-white border border-black hover:bg-black hover:text-white px-3 py-1.5 rounded-md text-sm font-semibold transition-colors"
             >
-              Write a review
+              ✍️ Write a review
             </Link>
-            <button aria-label="Menu" className="p-2">
-              <Bars3Icon className="w-6 h-6" />
-            </button>
           </div>
         </div>
       </div>
