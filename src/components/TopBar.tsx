@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Bars3Icon } from "@heroicons/react/24/solid"
 
 export default function TopBar() {
   const pathname = usePathname()
