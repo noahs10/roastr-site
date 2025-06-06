@@ -1,7 +1,10 @@
 import Link from "next/link";
 
-export default function QueryPage({ searchParams }: { searchParams: { q?: string } }) {
-  const query = searchParams.q || "";
+
+export default async function QueryPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
+  const { q } = await searchParams;
+  const query = q || "";
+
   return (
     <main className="max-w-screen-lg mx-auto px-4 sm:px-6 pt-24 space-y-6">
       <h1 className="text-xl font-semibold">Search Results{query ? ` for "${query}"` : ""}</h1>
