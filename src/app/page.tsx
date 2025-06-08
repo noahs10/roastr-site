@@ -9,7 +9,7 @@ import ReviewCard from "@/components/ReviewCard";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { useEffect, useState } from "react";
-import { getBeans, getRecentReviews, Bean, Review } from "@/lib/api";
+import { getBeans, getRecentBrewLogs, Bean, BrewLog } from "@/lib/api";
 
 //Top Beans keenSlider config
 export default function Home() {
@@ -35,14 +35,14 @@ export default function Home() {
   });
 
   const [beansData, setBeansData] = useState<Bean[]>([]);
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviews, setReviews] = useState<BrewLog[]>([]);
 
   useEffect(() => {
     async function load() {
       try {
         const fetchedBeans = await getBeans();
         setBeansData(fetchedBeans);
-        const fetchedReviews = await getRecentReviews(5);
+        const fetchedReviews = await getRecentBrewLogs(5);
         setReviews(fetchedReviews);
       } catch (err) {
         console.error("Failed to fetch data", err);

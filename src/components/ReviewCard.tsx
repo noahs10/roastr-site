@@ -4,42 +4,37 @@ import { useState } from 'react'
 import Link from 'next/link'
 
 type ReviewCardProps = {
-  roaster: string
-  bean: string
+  roaster_name: string | null
+  bean_name: string
   slug: string
-  emoji: string
-  title: string
+  score: number
   content: string
-  user: string
+  user_id: string
 }
 
 export default function ReviewCard({
-  roaster,
-  bean,
+  roaster_name,
+  bean_name,
   slug,
-  emoji,
-  title,
+  score,
   content,
-  user,
+  user_id,
 }: ReviewCardProps) {
   const [expanded, setExpanded] = useState(false)
 
   return (
     <div className="rounded-2xl border border-gray-200 px-5 py-4 text-left text-sm sm:text-base">
       {/* Roaster and Bean */}
-      <p className="text-xs text-gray-500 truncate">{roaster}</p>
+      <p className="text-xs text-gray-500 truncate">{roaster_name}</p>
 
       <Link href={`/bean/${slug}`}>
         <p className="text-sm font-semibold text-black mb-3 hover:underline">
-          {bean}
+          {bean_name}
         </p>
       </Link>
 
-      {/* Emoji and Title */}
-      <div className="text-xs flex items-center gap-2 font-semibold text-black mb-2">
-        <span>{emoji}</span>
-        <span>{title}</span>
-      </div>
+      {/* Score */}
+      <p className="text-xs font-semibold text-black mb-2">Score: {score}</p>
 
       {/* Review Content */}
       <p className={`text-xs text-gray-800 leading-snug ${!expanded ? 'line-clamp-3' : ''}`}>
@@ -48,7 +43,7 @@ export default function ReviewCard({
 
       {/* Reviewer */}
       <p className="text-xs text-gray-400 mt-1">
-        by <span className="font-semibold">{user}</span>
+        by <span className="font-semibold">{user_id}</span>
       </p>
 
       {/* Toggle */}

@@ -2,9 +2,12 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, install dependencies and run the development server:
 
 ```bash
+# install dependencies
+npm install
+# start the dev server
 npm run dev
 # or
 yarn dev
@@ -29,7 +32,7 @@ NEXT_PUBLIC_SUPABASE_URL=your-project-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 ```
 
-The front end queries the `beans` and `reviews` tables directly using these values.
+The front end queries the `beans` and `brew_logs` tables directly using these values.
 
 ## Learn More
 

@@ -1,8 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import BrewLogCard from "@/components/BrewLogCard";
-import { getBeanBySlug, getReviewsForBean, getBeans } from "@/lib/api";
+import { getBeanBySlug, getBrewLogsForBean, getBeans } from "@/lib/api";
 
 interface BeanParams {
   slug: string;
@@ -30,8 +29,8 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${bean.name} – ${bean.roaster} | roastr Reviews`,
-    description: `Discover ${bean.name} by ${bean.roaster}. Real brews and reviews from the roastr community.`,
+    title: `${bean.name} – ${bean.roaster_name} | roastr Reviews`,
+    description: `Discover ${bean.name} by ${bean.roaster_name}. Real brews and reviews from the roastr community.`,
   };
 }
 
@@ -42,7 +41,7 @@ export default async function BeanPage({
 }) {
   const { slug } = await params;
   const bean = await getBeanBySlug(slug);
-  const reviews = await getReviewsForBean(slug);
+  const reviews = await getBrewLogsForBean(slug);
 
   if (!bean) return notFound();
 
@@ -51,7 +50,7 @@ export default async function BeanPage({
       {/* Image */}
       <div className="relative h-[200px] sm:h-[300px] w-full rounded-lg border-2 border-gray-800">
         <Image
-          src={bean.image}
+          src={bean.image_url}
           alt={bean.name}
           fill
           className="object-contain"
@@ -61,7 +60,7 @@ export default async function BeanPage({
 
       {/* Header */}
       <div className="space-y-1">
-        <p className="text-sm text-gray-600 underline">{bean.roaster}</p>
+        <p className="text-sm text-gray-600 underline">{bean.roaster_name}</p>
         <h1 className="text-2xl font-bold">{bean.name}</h1>
       </div>
 
@@ -74,55 +73,14 @@ export default async function BeanPage({
           <strong>Variety:</strong> {bean.variety}
         </p>
         <p>
-          <strong>Elevation:</strong> {bean.elevation}
-        </p>
-        <p>
           <strong>Process:</strong> {bean.process}
         </p>
         <p>
-          <strong>Taste Profile:</strong> {bean.tasteProfile.join(", ")}
+          <strong>Roast Profile:</strong> {bean.roast_profile}
         </p>
-      </div>
-
-      {/* Divider */}
-      <hr className="my-8 border-t border-gray-800" />
-
-      {/* Rating Section */}
-      <div className="space-y-4">
-        <p className="text-xl font-bold text-gray-500 text-center">
-          roastr Community Rating
+        <p>
+          <strong>Taste Profile:</strong> {bean.taste_profile?.join(", ")}
         </p>
-        {/* Score Card */}
-        <div className="bg-yellow-300 rounded-2xl py-4 px-6 text-center shadow-sm">
-          <p className="text-3xl font-bold">{bean.score}</p>
-          <p className="text-sm">&quot;{bean.description}&quot;</p>
-          <p className="text-xs text-gray-700 mt-1 italic">
-            ({bean.ratings} ratings)
-          </p>
-        </div>
-        {/* Summary */}
-        <div className="text-sm text-black leading-relaxed space-y-4">
-          <p>
-            The roastr community mostly thinks this coffee is a well rounded
-            coffee with prominent flavor of pomegranate widely mentioned.
-            However body is considered thin and tea-like rather than bold. This
-            is a decent coffee that you can try from People Temple Roastery.
-          </p>
-          {/* Review Button */}
-          <div className="space-y-2">
-            <p className="text-center font-semibold mt-8">
-              Have you tried this bean?
-            </p>
-            <div className="flex justify-center">
-              <Link
-                href="/review"
-                className="bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors inline-block"
-              >
-                ✍️ Write a review
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Divider */}

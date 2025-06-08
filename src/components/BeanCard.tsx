@@ -2,22 +2,16 @@ import Image from "next/image"
 import Link from "next/link"
 
 type BeanCardProps = {
-  image: string
-  roaster: string
+  image_url: string
+  roaster_name: string | null
   name: string
-  score: number
-  ratings: number
-  description: string
   slug: string
 }
 
 export default function BeanCard({
-  image,
-  roaster,
+  image_url,
+  roaster_name,
   name,
-  score,
-  ratings,
-  description,
   slug,
 }: BeanCardProps) {
   return (
@@ -34,7 +28,7 @@ export default function BeanCard({
         {/* Image Section */}
         <div className="relative h-[100px] sm:h-[160px] w-full">
           <Image
-            src={image}
+            src={image_url}
             alt={name}
             fill
             className="object-contain"
@@ -44,21 +38,14 @@ export default function BeanCard({
         {/* Text Section */}
         <div className="flex flex-col px-3 sm:px-5 py-5 text-left flex-1 ">
           <p className="text-[10px] sm:text-xs text-gray-500 truncate">
-            {roaster}
+            {roaster_name}
           </p>
 
           <p className="font-semibold text-sm sm:text-base leading-snug line-clamp-2 break-words min-h-[2rem]">
             {name}
           </p>
 
-          {/* Bottom-aligned Rating + Description */}
-          <div className="mt-auto space-y-1">
-            <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
-              <span className="text-blue-600 font-bold">{score}</span>
-              <span className="text-gray-400">({ratings} ratings)</span>
-            </p>
-            <p className="text-xs sm:text-sm text-gray-500 font-bold">{description}</p>
-          </div>
+          <div className="mt-auto" />
         </div>
       </div>
     </Link>
