@@ -11,6 +11,8 @@ export type BrewLog = {
     slug: string
     name: string
     image_url: string
+    average_score?: number
+    ratings_count?: number
     roaster: {
       name: string
     } | null
@@ -32,6 +34,8 @@ export async function fetchRecentBrewLogs(limit = 2): Promise<BrewLog[]> {
         slug,
         name,
         image_url,
+        average_score,
+        ratings_count,
         roaster:roaster_id (
           name
         )

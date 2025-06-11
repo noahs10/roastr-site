@@ -4,17 +4,16 @@ import BeanCard from '@/components/BeanCard'
 import { useKeenSlider } from 'keen-slider/react'
 import 'keen-slider/keen-slider.min.css'
 
-export type BeanOfMonth = {
+export type BeanSliderData = {
   slug: string
   image: string
   roaster: string
   name: string
-  // score: number
-  // ratings: number
-  // description: string
+  average_score: number
+  ratings_count: number
 }
 
-export default function BeansSlider({ beans }: { beans: BeanOfMonth[] }) {
+export default function BeansSlider({ beans }: { beans: BeanSliderData[] }) {
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 2,

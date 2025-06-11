@@ -5,6 +5,7 @@ import Link from "next/link";
 import BrewLogCard from "@/components/BrewLogCard";
 import { fetchBeanBySlug } from '@/lib/fetchBeanBySlug'
 import { supabase } from '@/lib/supabaseClient'
+import { getRoastrScore } from "@/utils/supabase/roastrScore"
 // import { createClient } from '@/utils/supabase/server'
 
 
@@ -41,6 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<BeanParams>
 export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
   const { slug } = await params
   const bean = await fetchBeanBySlug(slug)
+  const { average_score, roastrEmoji, roastrScoreDesc, ratings_count, bgColor } =
+      getRoastrScore(bean?.average_score, bean?.ratings_count)
 
   if (!bean) return notFound();
 
@@ -79,10 +82,10 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       <div className="space-y-4">
         <p className="text-xl font-bold text-gray-500 text-center">roastr Community Rating</p>
         {/* Score Card */}
-        <div className="bg-yellow-300 rounded-2xl py-4 px-6 text-center shadow-sm">
-          <p className="text-3xl font-bold">XX</p>
-          <p className="text-sm">&quot;This is the desc&quot;</p>
-          <p className="text-xs text-gray-700 mt-1 italic">(XX ratings)</p>
+        <div className={`${bgColor} rounded-2xl py-4 px-6 text-center shadow-sm`}>
+          <p className="text-3xl font-bold">{average_score}</p>
+          <p className="text-sm">&quot;{roastrScoreDesc}&quot;</p>
+          <p className="text-xs text-gray-700 mt-1 italic">({ratings_count} ratings)</p>
         </div>
         {/* Summary */}
         <div className="text-sm text-black leading-relaxed space-y-4">
@@ -119,6 +122,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
               key={i}
               {...brew_log}
               user={brew_log.user_id ?? "Anonymous"}
+              score={brew_log.score}
             />
           ))}
         </div>

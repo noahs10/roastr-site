@@ -10,6 +10,8 @@ export type Bean = {
   process: string
   roast_profile: string
   taste_profile: string
+  average_score: number
+  ratings_count: number
   roaster: {
     id: string
     name: string
@@ -39,6 +41,8 @@ export async function fetchBeanBySlug(slug: string) {
       process,
       roast_profile,
       taste_profile,
+      average_score,
+      ratings_count,
       roaster:roaster_id (
         id,
         name,

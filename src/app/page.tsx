@@ -34,6 +34,8 @@ export default async function Home() {
           image: bean.image_url, // ensure 'image' exists on bean
           roaster: bean.roaster?.name ?? 'Unknown Roaster',
           name: bean.name,
+          ratings_count: bean.ratings_count,
+          average_score: bean.average_score,
         }))} />
       </section>
 
@@ -43,7 +45,7 @@ export default async function Home() {
       {/* Recent Reviews */}
       <section className="pb-10">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Recent reviews</h2>
+          <h2 className="text-xl font-semibold">Recent Brew Logs</h2>
           {/* <button
           onClick={() => window.location.href = '/review'}
           className=" bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors"
@@ -60,6 +62,8 @@ export default async function Home() {
             slug={brew_log.bean?.slug ?? '#'}
             content={brew_log.content}
             user={brew_log.user_id}
+            average_score={brew_log.bean?.average_score ?? 0}
+            ratings_count={brew_log.bean?.ratings_count ?? 0}
           />
           ))}
         </div>

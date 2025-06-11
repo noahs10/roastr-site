@@ -2,28 +2,30 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { getBrewLogScore } from "@/utils/supabase/brewLogScore"
 
 type RecentBrewLogsCardProps = {
   roaster: string
   bean: string
   slug: string
-  // emoji: string
-  // title: string
   content: string
   user: string
+  average_score: number
+  ratings_count: number
 }
 
 export default function ReviewCard({
   roaster,
   bean,
   slug,
-  // emoji,
-  // title,
   content,
   user,
+  average_score,
+  ratings_count
 }: RecentBrewLogsCardProps) {
   const [expanded, setExpanded] = useState(false)
-
+  const {emoji, label} =
+      getBrewLogScore(average_score)
   return (
     <div className="rounded-2xl border border-gray-200 px-5 py-4 text-left text-sm sm:text-base">
       {/* Roaster and Bean */}
@@ -37,8 +39,8 @@ export default function ReviewCard({
 
       {/* Emoji and Title */}
       <div className="text-xs flex items-center gap-2 font-semibold text-black mb-2">
-        <span>emoji here</span>
-        <span>title here</span>
+        <span>{emoji}</span>
+        <span>{label}</span>
       </div>
 
       {/* Review Content */}
