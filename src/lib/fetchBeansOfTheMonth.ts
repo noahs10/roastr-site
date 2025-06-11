@@ -62,8 +62,8 @@ export async function fetchBeansofTheMonth(): Promise<Bean[]> {
     return []
   }
 
-  return (data ?? []).map((bean: any) => ({
+  return (data ?? []).map((bean: Record<string, unknown>) => ({
     ...bean,
-    roaster_id: bean.roaster_id,
-  }))
+    roaster: Array.isArray(bean.roaster) ? bean.roaster[0] ?? null : bean.roaster,
+  })) as Bean[]
 }

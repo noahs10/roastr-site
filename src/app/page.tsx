@@ -62,8 +62,7 @@ export default async function Home() {
             slug={brew_log.bean?.slug ?? '#'}
             content={brew_log.content}
             user={brew_log.user_id}
-            average_score={brew_log.bean?.average_score ?? 0}
-            ratings_count={brew_log.bean?.ratings_count ?? 0}
+            score={typeof brew_log.score === "number" ? brew_log.score : Number(brew_log.score)}
           />
           ))}
         </div>

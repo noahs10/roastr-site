@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<BeanParams>
 export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
   const { slug } = await params
   const bean = await fetchBeanBySlug(slug)
-  const { average_score, roastrEmoji, roastrScoreDesc, ratings_count, bgColor } =
+  const { average_score, roastrScoreDesc, ratings_count, bgColor } =
       getRoastrScore(bean?.average_score, bean?.ratings_count)
 
   if (!bean) return notFound();

@@ -10,8 +10,7 @@ type RecentBrewLogsCardProps = {
   slug: string
   content: string
   user: string
-  average_score: number
-  ratings_count: number
+  score: number
 }
 
 export default function ReviewCard({
@@ -20,12 +19,11 @@ export default function ReviewCard({
   slug,
   content,
   user,
-  average_score,
-  ratings_count
+  score,
 }: RecentBrewLogsCardProps) {
   const [expanded, setExpanded] = useState(false)
   const {emoji, label} =
-      getBrewLogScore(average_score)
+      getBrewLogScore(score)
   return (
     <div className="rounded-2xl border border-gray-200 px-5 py-4 text-left text-sm sm:text-base">
       {/* Roaster and Bean */}

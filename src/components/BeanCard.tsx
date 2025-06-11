@@ -23,7 +23,7 @@ export default function BeanCard({
   slug,
 }: BeanCardProps) {
 
-  const { avgScore, roastrEmoji, roastrScoreDesc, count } =
+  const {roastrEmoji, roastrScoreDesc} =
     getRoastrScore(average_score, ratings_count)
 
   return (

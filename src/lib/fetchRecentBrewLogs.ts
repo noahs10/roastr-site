@@ -1,4 +1,3 @@
-import { beans } from '@/data/beans'
 import { createClient } from '../utils/supabase/server'
 
 export type BrewLog = {
@@ -19,8 +18,8 @@ export type BrewLog = {
   } | null
 }
 
-export async function fetchRecentBrewLogs(limit = 2): Promise<BrewLog[]> {
-  const supabase = await createClient() // ✅ await because your version is async
+export async function fetchRecentBrewLogs(limit = 5): Promise<BrewLog[]> {
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('brew_logs')
@@ -30,7 +29,7 @@ export async function fetchRecentBrewLogs(limit = 2): Promise<BrewLog[]> {
       score,
       content,
       created_at,
-      beans (
+      bean:bean_id (
         slug,
         name,
         image_url,
@@ -44,13 +43,35 @@ export async function fetchRecentBrewLogs(limit = 2): Promise<BrewLog[]> {
     .order('created_at', { ascending: false })
     .limit(limit)
 
-  if (error) {
-    console.error('Error fetching brew logs:', error.message)
+  if (error || !data) {
+    console.error('Error fetching brew logs:', error?.message)
     return []
   }
 
-  return (data ?? []).map((bean: any) => ({
-    ...bean,
-    bean: Array.isArray(bean.beans) ? bean.beans[0] ?? null : bean.beans,
-  }))
+  // Type-safe normalization
+  const logs: BrewLog[] = data.map((log) => {
+    // Ensure bean is an object, not an array
+    const beanRaw = log.bean;
+    const beanObj = Array.isArray(beanRaw) ? beanRaw[0] : beanRaw;
+
+    const bean = beanObj
+      ? {
+          ...beanObj,
+          roaster: Array.isArray(beanObj.roaster)
+            ? beanObj.roaster[0] ?? null
+            : beanObj.roaster ?? null,
+        }
+      : null;
+
+    return {
+      id: log.id,
+      user_id: log.user_id,
+      content: log.content,
+      score: log.score,
+      created_at: log.created_at,
+      bean,
+    };
+  })
+
+  return logs
 }
