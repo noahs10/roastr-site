@@ -1,28 +1,18 @@
-// "use client"
 
 //import UI components
 import HeroSection from "@/components/HeroSection"
-import ReviewCard from "@/components/ReviewCard"
+import ReviewCard from "@/components/RecentBrewLogCard"
 import BeansSlider from "@/components/BeansSlider"
 
 //import functions and data
-import { beans } from "@/data/beans"
-
-import { mockBeanData } from "@/data/mockBeanData"
+import { fetchBeansWithRelations } from '@/lib/fetchBeansOfTheMonth'
+import { fetchRecentBrewLogs } from '@/lib/fetchRecentBrewLogs'
 
 // Top Beans and Recent Reviews
-export default function Home() {
+export default async function Home() {
+  const beans = await fetchBeansWithRelations()
+  const brew_logs = await fetchRecentBrewLogs()
   
-// Mock reviews data
-  const reviews = Object.values(mockBeanData).flatMap((bean) =>
-    bean.reviews.map((review) => ({
-      roaster: bean.roaster,
-      bean: bean.name,
-      slug: bean.slug,
-      ...review,
-    }))
-  )
-
   return (
   <main >
     {/* Hero Section */}
@@ -39,7 +29,12 @@ export default function Home() {
           </div>
         </div>
 
-        <BeansSlider beans={beans} />
+        <BeansSlider beans={beans.map(bean => ({
+          slug: bean.slug,
+          image: bean.image_url, // ensure 'image' exists on bean
+          roaster: bean.roaster?.name ?? 'Unknown Roaster',
+          name: bean.name,
+        }))} />
       </section>
 
       {/* Divider */}
@@ -57,8 +52,8 @@ export default function Home() {
           </button> */}
         </div>
         <div className="space-y-6">
-          {reviews.map((review, i) => (
-            <ReviewCard key={i} {...review} />
+          {brew_logs.map((brew_logs, i) => (
+            <RecentBrewLogCard key={i} {...brew_logs} />
           ))}
         </div>
       </section>

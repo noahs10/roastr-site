@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import Link from 'next/link'
 
-type ReviewCardProps = {
+type RecentBrewLogsCardProps = {
   roaster: string
   bean: string
   slug: string
-  emoji: string
-  title: string
+  // emoji: string
+  // title: string
   content: string
   user: string
 }
@@ -17,11 +17,11 @@ export default function ReviewCard({
   roaster,
   bean,
   slug,
-  emoji,
-  title,
+  // emoji,
+  // title,
   content,
   user,
-}: ReviewCardProps) {
+}: RecentBrewLogsCardProps) {
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -37,8 +37,8 @@ export default function ReviewCard({
 
       {/* Emoji and Title */}
       <div className="text-xs flex items-center gap-2 font-semibold text-black mb-2">
-        <span>{emoji}</span>
-        <span>{title}</span>
+        <span>emoji here</span>
+        <span>title here</span>
       </div>
 
       {/* Review Content */}

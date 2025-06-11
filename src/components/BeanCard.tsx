@@ -5,9 +5,9 @@ type BeanCardProps = {
   image: string
   roaster: string
   name: string
-  score: number
-  ratings: number
-  description: string
+  // score: number
+  // ratings: number
+  // description: string
   slug: string
 }
 
@@ -15,9 +15,9 @@ export default function BeanCard({
   image,
   roaster,
   name,
-  score,
-  ratings,
-  description,
+  // score,
+  // ratings,
+  // description,
   slug,
 }: BeanCardProps) {
   return (
@@ -54,10 +54,10 @@ export default function BeanCard({
           {/* Bottom-aligned Rating + Description */}
           <div className="mt-auto space-y-1">
             <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
-              <span className="text-blue-600 font-bold">{score}</span>
-              <span className="text-gray-400">({ratings} ratings)</span>
+              <span className="text-blue-600 font-bold">score</span>
+              <span className="text-gray-400">XX ratings</span>
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 font-bold">{description}</p>
+            <p className="text-xs sm:text-sm text-gray-500 font-bold">description</p>
           </div>
         </div>
       </div>

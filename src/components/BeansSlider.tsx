@@ -9,9 +9,9 @@ export type BeanOfMonth = {
   image: string
   roaster: string
   name: string
-  score: number
-  ratings: number
-  description: string
+  // score: number
+  // ratings: number
+  // description: string
 }
 
 export default function BeansSlider({ beans }: { beans: BeanOfMonth[] }) {

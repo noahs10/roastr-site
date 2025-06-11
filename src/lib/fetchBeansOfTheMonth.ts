@@ -1,4 +1,4 @@
-import { createClient } from './server'
+import { createClient } from '../utils/supabase/server'
 
 export type Bean = {
   id: string
@@ -10,7 +10,7 @@ export type Bean = {
   process: string
   roast_profile: string
   taste_profile: string
-  roaster_id: {
+  roaster: {
     id: string
     name: string
     logo_url: string
@@ -18,7 +18,7 @@ export type Bean = {
   brew_logs: {
     id: string
     user_id: string
-    score: string
+    score: number
     content: string
     created_at: string
   }[]
@@ -30,7 +30,6 @@ export async function fetchBeansWithRelations(): Promise<Bean[]> {
   const { data, error } = await supabase
     .from('beans')
     .select(`
-
       id,
       name,
       slug,
@@ -40,7 +39,7 @@ export async function fetchBeansWithRelations(): Promise<Bean[]> {
       process,
       roast_profile,
       taste_profile,
-      roaster_id (
+      roaster:roaster_id (
         id,
         name,
         logo_url
@@ -59,8 +58,8 @@ export async function fetchBeansWithRelations(): Promise<Bean[]> {
     return []
   }
 
-  return (data ?? []).map((bean: Bean) => ({
+  return (data ?? []).map((bean: any) => ({
     ...bean,
-    roaster_id: Array.isArray(bean.roaster_id) ? (bean.roaster_id[0] ?? null) : bean.roaster_id,
+    roaster_id: bean.roaster_id,
   }))
 }
