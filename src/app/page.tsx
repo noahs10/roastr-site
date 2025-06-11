@@ -1,7 +1,7 @@
 
 //import UI components
 import HeroSection from "@/components/HeroSection"
-import ReviewCard from "@/components/RecentBrewLogCard"
+import RecentBrewLogCard from "@/components/RecentBrewLogCard"
 import BeansSlider from "@/components/BeansSlider"
 
 //import functions and data
@@ -52,8 +52,15 @@ export default async function Home() {
           </button> */}
         </div>
         <div className="space-y-6">
-          {brew_logs.map((brew_logs, i) => (
-            <RecentBrewLogCard key={i} {...brew_logs} />
+          {brew_logs.map((brew_log, i) => (
+            <RecentBrewLogCard
+            key={i}
+            roaster={brew_log.beans?.roaster?.name ?? 'Unknown Roaster'}
+            bean={brew_log.beans?.name ?? 'Unknown Bean'}
+            slug={brew_log.beans?.slug ?? '#'}
+            content={brew_log.content}
+            user={brew_log.user_id}
+          />
           ))}
         </div>
       </section>
