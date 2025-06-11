@@ -1,26 +1,33 @@
 import Image from "next/image"
 import Link from "next/link"
+import { getRoastrScore } from "@/utils/supabase/roastrScore"
 
 type BeanCardProps = {
   image: string
   roaster: string
   name: string
-  score: number
-  ratings: number
-  description: string
+  average_score: number
+  ratings_count: number
   slug: string
 }
+
+
 
 export default function BeanCard({
   image,
   roaster,
   name,
-  score,
-  ratings,
-  description,
+  average_score,
+  ratings_count,
+  // description,
   slug,
 }: BeanCardProps) {
+
+  const {roastrEmoji, roastrScoreDesc} =
+    getRoastrScore(average_score, ratings_count)
+
   return (
+
     <Link href={`/bean/${slug}`} className="inline-block">
       <div
         className="
@@ -54,10 +61,13 @@ export default function BeanCard({
           {/* Bottom-aligned Rating + Description */}
           <div className="mt-auto space-y-1">
             <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
-              <span className="text-blue-600 font-bold">{score}</span>
-              <span className="text-gray-400">({ratings} ratings)</span>
+              <span className="text-blue-600 font-bold">{average_score}</span>
+              <span className="text-xs text-gray-400">({ratings_count} ratings)</span>
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 font-bold">{description}</p>
+            <p className="text-xs sm:text-sm text-gray-500 font-bold">
+              <span className="text-xs sm:text-sm text-gray-500 font-bold">{roastrScoreDesc}</span>&nbsp;&nbsp;&nbsp;
+              <span className="text-blue-600 font-bold">{roastrEmoji}</span>              
+            </p>
           </div>
         </div>
       </div>

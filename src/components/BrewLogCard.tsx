@@ -1,22 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import { getBrewLogScore } from "@/utils/supabase/brewLogScore"
 
 export type BrewLogCardProps = {
-  emoji: string
-  title: string
+  score: number
   content: string
   user: string
 }
 
-export default function BrewLogCard({ emoji, title, content, user }: BrewLogCardProps) {
+export default function BrewLogCard({ content, user, score }: BrewLogCardProps) {
   const [expanded, setExpanded] = useState(false)
+  const {emoji, label} = getBrewLogScore(score)
 
   return (
     <div className="rounded-2xl border border-gray-200 px-5 py-4 text-left text-sm sm:text-base shadow-sm">
       <div className="text-base flex items-center gap-2 font-semibold text-black mb-2">
         <span>{emoji}</span>
-        <span>{title}</span>
+        <span>{label}</span>
       </div>
 
       <p className={`text-sm text-gray-800 leading-snug ${!expanded ? 'line-clamp-3' : ''}`}>{content}</p>

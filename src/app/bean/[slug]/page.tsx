@@ -1,22 +1,30 @@
-import { mockBeanData, BeanSlug } from "@/data/mockBeanData";
+// import { mockBeanData, BeanSlug } from "@/data/mockBeanData";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import BrewLogCard from "@/components/BrewLogCard";
+import { fetchBeanBySlug } from '@/lib/fetchBeanBySlug'
+import { supabase } from '@/lib/supabaseClient'
+import { getRoastrScore } from "@/utils/supabase/roastrScore"
+// import { createClient } from '@/utils/supabase/server'
+
 
 interface BeanParams {
   slug: string;
 }
 
 export async function generateStaticParams() {
-  return Object.keys(mockBeanData).map((slug) => ({
-    slug,
-  }));
+  const { data, error } = await supabase.from('beans').select('slug')
+
+  if (error || !data) return []
+
+  return data.map((bean) => ({ slug: bean.slug }))
 }
 
+// 2. Set SEO metadata per bean
 export async function generateMetadata({ params }: { params: Promise<BeanParams> }) {
-  const { slug } = await params;
-  const bean = mockBeanData[slug as BeanSlug]
+  const { slug } = await params
+  const bean = await fetchBeanBySlug(slug)
 
   if (!bean) {
     return {
@@ -26,15 +34,16 @@ export async function generateMetadata({ params }: { params: Promise<BeanParams>
   }
 
   return {
-    title: `${bean.name} – ${bean.roaster} | roastr Reviews`,
-    description: `Discover ${bean.name} by ${bean.roaster}. Real brews and reviews from the roastr community.`,
+    title: `${bean.name} – ${bean.roaster?.name ?? "Unknown Roaster"} | roastr Reviews`,
+    description: `Discover ${bean.name} by ${bean.roaster?.name ?? "Unknown Roaster"}. Real brews and reviews from the roastr community.`,
   };
 }
 
 export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
-  const { slug } = await params;
-  const bean = mockBeanData[slug as BeanSlug]
-
+  const { slug } = await params
+  const bean = await fetchBeanBySlug(slug)
+  const { average_score, roastrScoreDesc, ratings_count, bgColor } =
+      getRoastrScore(bean?.average_score, bean?.ratings_count)
 
   if (!bean) return notFound();
 
@@ -43,7 +52,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       {/* Image */}
       <div className="relative h-[200px] sm:h-[300px] w-full rounded-lg border-2 border-gray-800">
         <Image
-          src={bean.image}
+          src={bean.image_url}
           alt={bean.name}
           fill
           className="object-contain"
@@ -53,7 +62,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
       {/* Header */}
       <div className="space-y-1">
-        <p className="text-sm text-gray-600 underline">{bean.roaster}</p>
+        <p className="text-sm text-gray-600 underline">{bean.roaster?.name}</p>
         <h1 className="text-2xl font-bold">{bean.name}</h1>
       </div>
 
@@ -61,9 +70,9 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       <div className="text-sm text-gray-800 space-y-1">
         <p><strong>Origin:</strong> {bean.origin}</p>
         <p><strong>Variety:</strong> {bean.variety}</p>
-        <p><strong>Elevation:</strong> {bean.elevation}</p>
         <p><strong>Process:</strong> {bean.process}</p>
-        <p><strong>Taste Profile:</strong> {bean.tasteProfile.join(", ")}</p>
+        <p><strong>Roast Profile:</strong> {bean.roast_profile}</p>
+        <p><strong>Taste Profile:</strong> {bean.taste_profile}</p>
       </div>
 
       {/* Divider */}
@@ -73,10 +82,10 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       <div className="space-y-4">
         <p className="text-xl font-bold text-gray-500 text-center">roastr Community Rating</p>
         {/* Score Card */}
-        <div className="bg-yellow-300 rounded-2xl py-4 px-6 text-center shadow-sm">
-          <p className="text-3xl font-bold">{bean.score}</p>
-          <p className="text-sm">&quot;{bean.description}&quot;</p>
-          <p className="text-xs text-gray-700 mt-1 italic">({bean.ratings} ratings)</p>
+        <div className={`${bgColor} rounded-2xl py-4 px-6 text-center shadow-sm`}>
+          <p className="text-3xl font-bold">{average_score}</p>
+          <p className="text-sm">&quot;{roastrScoreDesc}&quot;</p>
+          <p className="text-xs text-gray-700 mt-1 italic">({ratings_count} ratings)</p>
         </div>
         {/* Summary */}
         <div className="text-sm text-black leading-relaxed space-y-4">
@@ -108,8 +117,13 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       <div>
         <h2 className="text-lg font-semibold mb-4">Top Brew Logs</h2>
         <div className="space-y-4">
-          {bean.reviews.map((review, i) => (
-            <BrewLogCard key={i} {...review} />
+          {bean.brew_logs.map((brew_log, i) => (
+            <BrewLogCard
+              key={i}
+              {...brew_log}
+              user={brew_log.user_id ?? "Anonymous"}
+              score={brew_log.score}
+            />
           ))}
         </div>
         <p className="text-center mt-6 text-sm font-medium">
