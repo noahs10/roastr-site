@@ -1,4 +1,4 @@
-"use client"
+// "use client"
 
 //import UI components
 import HeroSection from "@/components/HeroSection"
@@ -9,6 +9,7 @@ import ReviewCard from "@/components/ReviewCard"
 import "keen-slider/keen-slider.min.css"
 import { useKeenSlider } from "keen-slider/react"
 import { beans } from "@/data/beans"
+
 import { mockBeanData } from "@/data/mockBeanData"
 
 //Top Beans keenSlider config
