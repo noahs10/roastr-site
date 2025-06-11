@@ -24,8 +24,8 @@ export type Bean = {
   }[]
 }
 
-export async function fetchBeansofTheMonth(): Promise<Bean[]> {
-  const supabase = await createClient() // ✅ await because your version is async
+export async function fetchBeanBySlug(slug: string) {
+  const supabase = await createClient()
 
   const { data, error } = await supabase
     .from('beans')
@@ -52,14 +52,18 @@ export async function fetchBeansofTheMonth(): Promise<Bean[]> {
         created_at
       )
     `)
-
+    .eq('slug', slug)
+    .maybeSingle() // ✅ safer than .single()
   if (error) {
-    console.error('Supabase fetch error:', error.message)
-    return []
+    console.error('Error fetching bean by slug:', error.message)
+    return null
   }
 
-  return (data ?? []).map((bean: any) => ({
-    ...bean,
-    roaster_id: bean.roaster_id,
-  }))
+  if (!data) {
+  return null
+}
+  return {
+  ...data,
+  roaster: Array.isArray(data.roaster) ? data.roaster[0] ?? null : data.roaster,
+}
 }

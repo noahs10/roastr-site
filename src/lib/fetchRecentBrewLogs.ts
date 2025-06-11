@@ -1,3 +1,4 @@
+import { beans } from '@/data/beans'
 import { createClient } from '../utils/supabase/server'
 
 export type BrewLog = {
@@ -16,7 +17,7 @@ export type BrewLog = {
   } | null
 }
 
-export async function fetchRecentBrewLogs(limit = 5): Promise<BrewLog[]> {
+export async function fetchRecentBrewLogs(limit = 2): Promise<BrewLog[]> {
   const supabase = await createClient() // ✅ await because your version is async
 
   const { data, error } = await supabase
@@ -46,5 +47,6 @@ export async function fetchRecentBrewLogs(limit = 5): Promise<BrewLog[]> {
 
   return (data ?? []).map((bean: any) => ({
     ...bean,
+    bean: Array.isArray(bean.beans) ? bean.beans[0] ?? null : bean.beans,
   }))
 }

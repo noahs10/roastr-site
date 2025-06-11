@@ -5,12 +5,12 @@ import RecentBrewLogCard from "@/components/RecentBrewLogCard"
 import BeansSlider from "@/components/BeansSlider"
 
 //import functions and data
-import { fetchBeansWithRelations } from '@/lib/fetchBeansOfTheMonth'
+import { fetchBeansofTheMonth } from '@/lib/fetchBeansOfTheMonth'
 import { fetchRecentBrewLogs } from '@/lib/fetchRecentBrewLogs'
 
 // Top Beans and Recent Reviews
 export default async function Home() {
-  const beans = await fetchBeansWithRelations()
+  const beans = await fetchBeansofTheMonth()
   const brew_logs = await fetchRecentBrewLogs()
   
   return (
@@ -55,9 +55,9 @@ export default async function Home() {
           {brew_logs.map((brew_log, i) => (
             <RecentBrewLogCard
             key={i}
-            roaster={brew_log.beans?.roaster?.name ?? 'Unknown Roaster'}
-            bean={brew_log.beans?.name ?? 'Unknown Bean'}
-            slug={brew_log.beans?.slug ?? '#'}
+            roaster={brew_log.bean?.roaster?.name ?? 'Unknown Roaster'}
+            bean={brew_log.bean?.name ?? 'Unknown Bean'}
+            slug={brew_log.bean?.slug ?? '#'}
             content={brew_log.content}
             user={brew_log.user_id}
           />
