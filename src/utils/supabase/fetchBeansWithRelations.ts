@@ -59,7 +59,7 @@ export async function fetchBeansWithRelations(): Promise<Bean[]> {
     return []
   }
 
-  return (data ?? []).map((bean: any) => ({
+  return (data ?? []).map((bean: Bean) => ({
     ...bean,
     roaster_id: Array.isArray(bean.roaster_id) ? (bean.roaster_id[0] ?? null) : bean.roaster_id,
   }))
