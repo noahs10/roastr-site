@@ -10,7 +10,7 @@ interface RoasterParams {
 }
 
 export async function generateStaticParams() {
-  const { data, error } = await supabase.from('roasters').select('slug')
+  const { data, error } = await supabase.from('roaster').select('slug')
 
   if (error || !data) return []
 
