@@ -39,12 +39,17 @@ export async function generateMetadata({ params }: { params: Promise<BeanParams>
   };
 }
 
+function truncate(text: string, maxLength: number) {
+  return text.length > maxLength ? text.slice(0, maxLength) + '…' : text
+}
+
 export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
   const { slug } = await params
   const bean = await fetchBeanBySlug(slug)
   const { average_score, roastrScoreDesc, ratings_count, bgColor } =
       getRoastrScore(bean?.average_score, bean?.ratings_count)
-
+  const MAX_CRUMB_LENGTH = 20
+  
   if (!bean) return notFound();
 
   return (
@@ -55,7 +60,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
           { label: 'Home', href: '/' },
           { label: 'Roasters', href: '/roasters' },
           { label: bean.roaster?.name ?? "Unknown Roaster", href: `/roaster/${bean.roaster?.slug}` },
-          { label: bean.name }
+          { label: truncate(bean.name, MAX_CRUMB_LENGTH) },
         ]}
       />
       {/* Image */}
