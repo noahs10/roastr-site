@@ -22,7 +22,7 @@ export async function fetchRoasterBySlug(slug: string) {
   const supabase = await createClient()
 
   const { data, error } = await supabase
-    .from('roasters')
+    .from('roaster')
     .select(`
       id,
       slug,

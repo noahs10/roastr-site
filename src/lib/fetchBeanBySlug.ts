@@ -17,6 +17,7 @@ export type Bean = {
     id: string
     name: string
     logo_url: string
+    slug?: string
   } | null
   brew_logs: {
     id: string
@@ -48,7 +49,8 @@ export async function fetchBeanBySlug(slug: string) {
       roaster:roaster_id (
         id,
         name,
-        logo_url
+        logo_url,
+        slug
       ),
       brew_logs (
         id,

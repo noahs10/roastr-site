@@ -6,7 +6,7 @@ import BrewLogCard from "@/components/BrewLogCard";
 import { fetchBeanBySlug } from '@/lib/fetchBeanBySlug'
 import { supabase } from '@/lib/supabaseClient'
 import { getRoastrScore } from "@/utils/supabase/roastrScore"
-// import { createClient } from '@/utils/supabase/server'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 
 interface BeanParams {
@@ -49,6 +49,15 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
   return (
     <main className="max-w-screen-md mx-auto px-4 sm:px-6 py-10 space-y-6 pt-20">
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Roasters', href: '/roasters' },
+          { label: bean.roaster?.name ?? "Unknown Roaster", href: `/roaster/${bean.roaster?.slug}` },
+          { label: bean.name }
+        ]}
+      />
       {/* Image */}
       <div className="relative h-[200px] sm:h-[300px] w-full rounded-lg border-2 border-gray-800">
         <Image
@@ -62,7 +71,12 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
       {/* Header */}
       <div className="space-y-1">
-        <p className="text-sm text-gray-600 underline">{bean.roaster?.name}</p>
+        <Link href={`/roaster/${bean.roaster?.slug}`}>
+        <p className="text-sm text-gray-600 hover:underline">
+          {bean.roaster?.name}
+        </p>
+      </Link>
+        {/* <p className="text-sm text-gray-600 underline"></p> */}
         <h1 className="text-2xl font-bold">{bean.name}</h1>
       </div>
 
