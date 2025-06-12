@@ -10,7 +10,7 @@ export default function HeroSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    router.push(`/query${query ? `?q=${encodeURIComponent(query)}` : ""}`)
+    router.push(`/search${query ? `?q=${encodeURIComponent(query)}` : ""}`)
   }
 
   return (

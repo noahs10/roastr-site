@@ -16,6 +16,8 @@ export default async function QueryPage({
       <h1 className="text-xl font-semibold">
         Search Results{query ? ` for "${query}"` : ""}
       </h1>
+      {/* Divider */}
+      <hr className="my-8 border-t border-gray-200" />
       {beans.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {beans.map((bean) => (

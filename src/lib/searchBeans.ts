@@ -17,12 +17,22 @@ export async function searchBeans(query: string, limit = 10): Promise<SearchBean
 
   if (!query) return []
 
+  // const safeQuery = query.replace(/[%_]/g, ''); // strips SQL wildcard chars
+
   const { data, error } = await supabase
     .from('beans')
-    .select(
-      `id, slug, name, image_url, average_score, ratings_count, roaster:roaster_id(name)`
-    )
-    .or(`name.ilike.%${query}%, roaster.name.ilike.%${query}%`)
+    .select(`
+      id,
+      slug,
+      name,
+      image_url,
+      average_score,
+      ratings_count,
+      roaster:roaster_id(
+        name
+        )
+    `)
+    .or(`search_text.ilike.%${query}%`)
     .limit(limit)
 
   if (error || !data) {
