@@ -77,7 +77,7 @@ export default async function RoasterPage({ params }: { params: Promise<RoasterP
 
       {/* Beans */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">Beans</h2>
+        <h2 className="text-lg font-semibold mb-4">Beans by {roaster.name}</h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
           {roaster.beans.map((bean, i) => (
             <BeanCard

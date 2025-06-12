@@ -49,7 +49,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
   const { average_score, roastrScoreDesc, ratings_count, bgColor } =
       getRoastrScore(bean?.average_score, bean?.ratings_count)
   const MAX_CRUMB_LENGTH = 20
-  
+
   if (!bean) return notFound();
 
   return (
@@ -59,7 +59,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
         items={[
           { label: 'Home', href: '/' },
           { label: 'Roasters', href: '/roasters' },
-          { label: bean.roaster?.name ?? "Unknown Roaster", href: `/roaster/${bean.roaster?.slug}` },
+          { label: bean.roaster?.name ?? "Unknown Roaster", href: `/roasters/${bean.roaster?.slug}` },
           { label: truncate(bean.name, MAX_CRUMB_LENGTH) },
         ]}
       />
@@ -76,7 +76,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
       {/* Header */}
       <div className="space-y-1">
-        <Link href={`/roaster/${bean.roaster?.slug}`}>
+        <Link href={`/roasters/${bean.roaster?.slug}`}>
         <p className="text-sm text-gray-600 hover:underline">
           {bean.roaster?.name}
         </p>
