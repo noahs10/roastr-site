@@ -7,7 +7,8 @@ import { useEffect, useState } from "react"
 export default function TopBar() {
   const pathname = usePathname()
   const [visible, setVisible] = useState(pathname !== "/")
-
+  const isSubmitPage = pathname === "/submit"
+  
   useEffect(() => {
     if (pathname !== "/") {
       setVisible(true)
@@ -41,12 +42,17 @@ export default function TopBar() {
             roastr
           </Link>
           <div className="flex items-center gap-2">
-            <Link
-              href="/review"
-              className="bg-white border border-black hover:bg-black hover:text-white px-3 py-1.5 rounded-md text-sm font-semibold transition-colors"
-            >
-              ✍️ Write a review
-            </Link>
+            
+            {!isSubmitPage &&(
+              <Link
+                href="/submit"
+                className="bg-white border border-black hover:bg-black hover:text-white px-3 py-1.5 rounded-md text-sm font-semibold transition-colors"
+              >
+                ✍️ Write a review
+              </Link>
+            )}
+              
+
           </div>
         </div>
       </div>

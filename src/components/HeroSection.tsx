@@ -10,7 +10,7 @@ export default function HeroSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    router.push(`/query${query ? `?q=${encodeURIComponent(query)}` : ""}`)
+    router.push(`/search${query ? `?q=${encodeURIComponent(query)}` : ""}`)
   }
 
   return (
@@ -44,7 +44,7 @@ export default function HeroSection() {
       {/* CTA */}
       <p className="text-xs md:text-sm text-gray-300">
         Brewed something special?{" "}
-        <a href="/review" className="text-blue-400 underline font-medium">
+        <a href="/submit" className="text-blue-400 underline font-medium">
           Write a Brew Log
         </a>
       </p>

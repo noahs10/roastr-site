@@ -6,7 +6,7 @@ import BrewLogCard from "@/components/BrewLogCard";
 import { fetchBeanBySlug } from '@/lib/fetchBeanBySlug'
 import { supabase } from '@/lib/supabaseClient'
 import { getRoastrScore } from "@/utils/supabase/roastrScore"
-// import { createClient } from '@/utils/supabase/server'
+import { Breadcrumbs } from '@/components/Breadcrumbs'
 
 
 interface BeanParams {
@@ -39,16 +39,30 @@ export async function generateMetadata({ params }: { params: Promise<BeanParams>
   };
 }
 
+function truncate(text: string, maxLength: number) {
+  return text.length > maxLength ? text.slice(0, maxLength) + '…' : text
+}
+
 export default async function BeanPage({ params }: { params: Promise<BeanParams> }) {
   const { slug } = await params
   const bean = await fetchBeanBySlug(slug)
   const { average_score, roastrScoreDesc, ratings_count, bgColor } =
       getRoastrScore(bean?.average_score, bean?.ratings_count)
+  const MAX_CRUMB_LENGTH = 20
 
   if (!bean) return notFound();
 
   return (
     <main className="max-w-screen-md mx-auto px-4 sm:px-6 py-10 space-y-6 pt-20">
+      {/* Breadcrumbs */}
+      <Breadcrumbs
+        items={[
+          { label: 'Home', href: '/' },
+          { label: 'Roasters', href: '/roasters' },
+          { label: bean.roaster?.name ?? "Unknown Roaster", href: `/roasters/${bean.roaster?.slug}` },
+          { label: truncate(bean.name, MAX_CRUMB_LENGTH) },
+        ]}
+      />
       {/* Image */}
       <div className="relative h-[200px] sm:h-[300px] w-full rounded-lg border-2 border-gray-800">
         <Image
@@ -62,7 +76,12 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
       {/* Header */}
       <div className="space-y-1">
-        <p className="text-sm text-gray-600 underline">{bean.roaster?.name}</p>
+        <Link href={`/roasters/${bean.roaster?.slug}`}>
+        <p className="text-sm text-gray-600 hover:underline">
+          {bean.roaster?.name}
+        </p>
+      </Link>
+        {/* <p className="text-sm text-gray-600 underline"></p> */}
         <h1 className="text-2xl font-bold">{bean.name}</h1>
       </div>
 
@@ -90,7 +109,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
         {/* Summary */}
         <div className="text-sm text-black leading-relaxed space-y-4">
           <p>
-            The roastr community mostly thinks this coffee is a well rounded coffee with prominent flavor of pomegranate widely mentioned. However body is considered thin and tea-like rather than bold. This is a decent coffee that you can try from People Temple Roastery.
+            {bean.roastr_summary || "No summary available for this bean."}
           </p>
         {/* Review Button */}
         <div className="space-y-2">
@@ -99,7 +118,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
           </p>
           <div className="flex justify-center">
             <Link
-              href="/review"
+              href="/submit"
               className="bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors inline-block"
             >
               ✍️ Write a review
