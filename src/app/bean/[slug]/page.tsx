@@ -90,7 +90,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
         {/* Summary */}
         <div className="text-sm text-black leading-relaxed space-y-4">
           <p>
-            The roastr community mostly thinks this coffee is a well rounded coffee with prominent flavor of pomegranate widely mentioned. However body is considered thin and tea-like rather than bold. This is a decent coffee that you can try from People Temple Roastery.
+            {bean.roastr_summary || "No summary available for this bean."}
           </p>
         {/* Review Button */}
         <div className="space-y-2">

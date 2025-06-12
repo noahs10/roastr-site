@@ -12,6 +12,7 @@ export type Bean = {
   taste_profile: string
   average_score: number
   ratings_count: number
+  roastr_summary: string
   roaster: {
     id: string
     name: string
@@ -43,6 +44,7 @@ export async function fetchBeanBySlug(slug: string) {
       taste_profile,
       average_score,
       ratings_count,
+      roastr_summary,
       roaster:roaster_id (
         id,
         name,
