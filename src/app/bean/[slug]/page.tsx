@@ -118,7 +118,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
           </p>
           <div className="flex justify-center">
             <Link
-              href="/review"
+              href="/submit"
               className="bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors inline-block"
             >
               ✍️ Write a review
