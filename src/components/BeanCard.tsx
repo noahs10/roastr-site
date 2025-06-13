@@ -28,7 +28,7 @@ export default function BeanCard({
 
   return (
 
-    <Link href={`/bean/${slug}`} className="inline-block">
+    <Link href={`/bean/${slug}`} className="inline-block active:scale-95 transition-transform duration-150 ease-in-out">
       <div
         className="
           min-w-[120px] max-w-[150px] h-[240px]
