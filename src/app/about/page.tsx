@@ -47,7 +47,7 @@ export default function AboutPage() {
             <span className="relative z-10">“roastr Community Ratings”</span>
             <img
               src="/scribble-circle.svg"
-              width={w-[130%]}
+              width="130%"
               alt=""
               aria-hidden="true"
               className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-auto object-contain z-0 pointer-events-none"
