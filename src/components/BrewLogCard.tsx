@@ -24,7 +24,7 @@ export default function BrewLogCard({ content, user, score }: BrewLogCardProps) 
       <p className="text-sm text-gray-400 mt-4">
         by <span className="font-semibold">{user}</span>
       </p>
-      <button onClick={() => setExpanded(!expanded)} className="text-xs text-blue-600 font-medium mt-2">
+      <button onClick={() => setExpanded(!expanded)} className="text-xs text-blue-600 font-medium mt-2 hover:underline active:scale-95 transition-transform duration-150">
         {expanded ? 'See less' : 'See more'}
       </button>
     </div>
