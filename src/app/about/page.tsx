@@ -41,11 +41,22 @@ export default function AboutPage() {
 
       {/* Section 2: Roastr Score */}
       <section>
-        <h2 className="text-2xl font-bold underline underline-offset-4 decoration-blue-500 mb-4">
-          How the “roastr Score” works?
-        </h2>
+        <div className="text-2xl font-bold text-white">
+          How the&nbsp;
+          <span className="relative inline-block">
+            <span className="relative z-10">“roastr Community Ratings”</span>
+            <img
+              src="/scribble-circle.svg"
+              width={w-[130%]}
+              alt=""
+              aria-hidden="true"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-auto object-contain z-0 pointer-events-none"
+            />
+          </span>
+          &nbsp;works?
+        </div>
 
-        <div className="space-y-4 text-base text-gray-300 leading-relaxed">
+        <div className="space-y-4 text-base text-gray-300 leading-relaxed mt-4">
           <p>
             <strong className="text-white">Honest experience, not technical tasting.</strong><br />
             At Roastr, scoring is dead simple — we don’t use fancy grading sheets or flavor wheels.
@@ -81,7 +92,12 @@ export default function AboutPage() {
             <li>Below 50 → ❌ Not recommended</li>
           </ul>
 
-          <p>No Q-grader certificate required. Just real feedback from real drinkers. capeesh?</p>
+          <p>No Q-grader certificate required. Just real feedback from real drinkers.
+            <a
+            href="/submit"
+            className="underline hover:scale-95 active:scale-95 transition-transform duration-150">
+              Would you share one?</a>
+          </p>
         </div>
       </section>
     </div>

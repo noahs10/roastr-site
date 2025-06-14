@@ -1,5 +1,6 @@
 // import { mockBeanData, BeanSlug } from "@/data/mockBeanData";
-import { notFound } from "next/navigation";
+import { notFound } from "next/navigation"
+import { Info } from 'lucide-react'
 import Image from "next/image";
 import Link from "next/link";
 import BrewLogCard from "@/components/BrewLogCard";
@@ -77,7 +78,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       {/* Header */}
       <div className="space-y-1">
         <Link href={`/roasters/${bean.roaster?.slug}`}>
-        <p className="text-sm text-gray-600 hover:underline">
+        <p className="inline-block text-sm text-gray-600 origin-center hover:underline hover:scale-95 active:scale-95 transition-transform duration-150">
           {bean.roaster?.name}
         </p>
       </Link>
@@ -99,7 +100,17 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
 
       {/* Rating Section */}
       <div className="space-y-4">
-        <p className="text-xl font-bold text-gray-500 text-center">roastr Community Rating</p>
+        <div className="flex items-center justify-center gap-2 mb-4">
+          <p className="text-xl font-bold text-gray-500 text-center">roastr Community Rating</p>
+          <a
+            href="/about"
+            className="inline-flex items-center justify-center w-6 h-6 rounded-full hover:bg-gray-200 transition-colors duration-150"
+            title="Learn more about how ratings work"
+          >
+            <Info size={20} className="text-gray-500" />
+          </a>
+        </div>
+        
         {/* Score Card */}
         <div className={`${bgColor} rounded-2xl py-4 px-6 text-center shadow-sm`}>
           <p className="text-3xl font-bold">{average_score}</p>
@@ -119,7 +130,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
           <div className="flex justify-center">
             <Link
               href="/submit"
-              className="bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors inline-block"
+              className="bg-white text-black border border-black active:scale-95 transition-transform duration-150 active:bg-gray-800 focus:ring-2 focus:ring-blue-400 hover:border-white hover:bg-black hover:text-white px-3 py-1.5 rounded-md text-sm font-semibold transition-color"
             >
               ✍️ Write a review
             </Link>
@@ -134,7 +145,7 @@ export default async function BeanPage({ params }: { params: Promise<BeanParams>
       <hr className="my-8 border-t border-gray-800" />
       {/* Reviews */}
       <div>
-        <h2 className="text-lg font-semibold mb-4">Top Brew Logs</h2>
+        <h2 className="text-lg font-semibold mb-4">Brew Logs of {bean.name}</h2>
         <div className="space-y-4">
           {bean.brew_logs.map((brew_log, i) => (
             <BrewLogCard

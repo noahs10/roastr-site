@@ -50,9 +50,6 @@ export default function TopBar() {
 
         {/* Right: Links */}
         <div className="flex items-center gap-4">
-          <a href="/about" className="text-xs text-gray-300 hover:text-white transition">
-            About Us
-          </a>
 
           {!isSubmitPage && (
             <Link
