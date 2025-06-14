@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import Sidebar from "./sideBar"
 
 export default function TopBar() {
   const pathname = usePathname()
@@ -39,10 +40,13 @@ export default function TopBar() {
     <div className="bg-black">
       <div className="max-w-screen-lg mx-auto px-4 py-2 flex items-center justify-between">
         
-        {/* Left: Logo */}
-        <Link href="/" className="font-bold text-lg text-white hover:text-gray-300 transition-colors">
-          roastr
-        </Link>
+        {/* Left: Sidebar toggle and Logo */}
+        <div className="flex items-center gap-4">
+          <Sidebar />
+          <Link href="/" className="font-bold text-lg text-white hover:text-gray-300 transition-colors">
+            roastr
+          </Link>
+        </div>
 
         {/* Right: Links */}
         <div className="flex items-center gap-4">
