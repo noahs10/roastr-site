@@ -4,6 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import React, { useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link";
+import Sidebar from "./sideBar"
 
 export default function HeroSection() {
   const router = useRouter()
@@ -16,6 +17,11 @@ export default function HeroSection() {
 
   return (
     <section id="hero-section" className="relative bg-black text-white px-6 py-10 md:py-20 text-center">
+
+      {/* Sidebar trigger in top-left */}
+      <div className="absolute top-3 left-4">
+        <Sidebar />
+      </div>
 
       {/* 🔹 About Us link in top-right corner */}
       <Link
@@ -30,7 +36,7 @@ export default function HeroSection() {
 
       {/* Subtitle */}
       <p className="text-xs md:text-lg text-gray-300 max-w-xl mx-auto mb-8 leading-relaxed">
-        Explore Indo's best specialty coffee, and share your Brew! <br className="md:hidden" />
+        Explore Indo&apos;s best specialty coffee, and share your Brew! <br className="md:hidden" />
       </p>
 
       {/* Search Input */}
