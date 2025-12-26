@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { getRoastrScore } from "@/utils/supabase/roastrScore"
+import StarIcon from "./icons/StarIcon"
 
 type BeanCardProps = {
   image: string
@@ -11,7 +12,17 @@ type BeanCardProps = {
   slug: string
 }
 
+function formatRating(avgscore?: number | null) {
+  if (avgscore == null) return '0';
 
+  return avgscore.toFixed(1); // "4.2"
+}
+
+function formatRatingCount(ratings_count?: number | null) {
+  if (ratings_count == null) return '0';
+
+  return ratings_count.toString(); // "42"
+}
 
 export default function BeanCard({
   image,
@@ -31,8 +42,8 @@ export default function BeanCard({
     <Link href={`/bean/${slug}`} className="inline-block active:scale-95 transition-transform duration-150 ease-in-out">
       <div
         className="
-          min-w-[120px] max-w-[150px] h-[240px]
-          sm:min-w-[200px] sm:max-w-[220px] sm:h-[320px]
+          min-w-[120px] max-w-[150px] h-[220px]
+          sm:min-w-[200px] sm:max-w-[220px] sm:h-[300px]
           rounded-2xl border border-gray-200 bg-white
           shadow-sm overflow-hidden flex flex-col
           hover:border-neutral-900 hover:shadow-md transition-all duration-200
@@ -61,13 +72,14 @@ export default function BeanCard({
           {/* Bottom-aligned Rating + Description */}
           <div className="mt-auto space-y-1">
             <p className="text-xs sm:text-sm text-gray-500 flex items-center gap-1">
-              <span className="text-blue-600 font-bold">{average_score}</span>
-              <span className="text-xs text-gray-400">({ratings_count} ratings)</span>
+              <span><StarIcon className="w-4 h-4 text-black" /></span>
+              <span className="text-black font-bold">{formatRating(average_score)}</span>
+              <span className="text-xs text-gray-400">({formatRatingCount(ratings_count)} ratings)</span>
             </p>
-            <p className="text-xs sm:text-sm text-gray-500 font-bold">
+            {/* <p className="text-xs sm:text-sm text-gray-500 font-bold">
               <span className="text-xs sm:text-sm text-gray-500 font-bold">{roastrScoreDesc}</span>&nbsp;&nbsp;&nbsp;
               <span className="text-blue-600 font-bold">{roastrEmoji}</span>              
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
