@@ -45,7 +45,7 @@ export default async function Home() {
       {/* Recent Reviews */}
       <section className="pb-10">
         <div className="mb-4">
-          <h2 className="text-xl font-semibold">Discover Indo's Finest Roasters</h2>
+          <h2 className="text-xl font-semibold">Discover Finest Roasters</h2>
           <p className="text-gray-600 text-xs">the hands behind your favorite beans</p>
         </div>
  
