@@ -34,8 +34,8 @@ export default function BeanCard({
   slug,
 }: BeanCardProps) {
 
-  const {roastrEmoji, roastrScoreDesc} =
-    getRoastrScore(average_score, ratings_count)
+  // const {roastrEmoji, roastrScoreDesc} =
+  //   getRoastrScore(average_score, ratings_count)
 
   return (
 

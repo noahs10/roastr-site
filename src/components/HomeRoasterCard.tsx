@@ -1,7 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import { getRoastrScore } from "@/utils/supabase/roastrScore"
-import StarIcon from "./icons/StarIcon"
 
 type HomeRoasterCardProps = {
   slug: string

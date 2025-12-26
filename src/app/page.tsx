@@ -1,20 +1,16 @@
 
 //import UI components
 import HeroSection from "@/components/HeroSection"
-import RecentBrewLogCard from "@/components/RecentBrewLogCard"
 import BeansSlider from "@/components/BeansSlider"
 import { fetchDiscoverRoasters } from "@/lib/fetchDiscoverRoasters"
 
 //import functions and data
 import { fetchBeansofTheMonth } from '@/lib/fetchBeansOfTheMonth'
-import { fetchRecentBrewLogs } from '@/lib/fetchRecentBrewLogs'
-import RoasterCard from "@/components/RoasterCard"
 import RoasterSlider from "@/components/RoasterSlider"
 
 // Top Beans and Recent Reviews
 export default async function Home() {
   const beans = await fetchBeansofTheMonth()
-  const brew_logs = await fetchRecentBrewLogs()
   const discover_roasters = await fetchDiscoverRoasters()
 
   return (
