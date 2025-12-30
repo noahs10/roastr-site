@@ -1,18 +1,18 @@
 
 //import UI components
 import HeroSection from "@/components/HeroSection"
-import RecentBrewLogCard from "@/components/RecentBrewLogCard"
 import BeansSlider from "@/components/BeansSlider"
+import { fetchDiscoverRoasters } from "@/lib/fetchDiscoverRoasters"
 
 //import functions and data
 import { fetchBeansofTheMonth } from '@/lib/fetchBeansOfTheMonth'
-import { fetchRecentBrewLogs } from '@/lib/fetchRecentBrewLogs'
+import RoasterSlider from "@/components/RoasterSlider"
 
 // Top Beans and Recent Reviews
 export default async function Home() {
   const beans = await fetchBeansofTheMonth()
-  const brew_logs = await fetchRecentBrewLogs()
-  
+  const discover_roasters = await fetchDiscoverRoasters()
+
   return (
   <main >
     {/* Hero Section */}
@@ -44,34 +44,21 @@ export default async function Home() {
 
       {/* Recent Reviews */}
       <section className="pb-10">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-semibold">Recent Brew Logs</h2>
-          {/* <button
-          onClick={() => window.location.href = '/review'}
-          className=" bg-white border border-black hover:bg-black hover:text-white px-2 py-2 rounded-md text-sm font-semibold transition-colors"
-          >
-          ✍️  Write a review
-          </button> */}
+        <div className="mb-4">
+          <h2 className="text-xl font-semibold">Discover Finest Roasters</h2>
+          <p className="text-gray-600 text-xs">the hands behind your favorite beans</p>
         </div>
+ 
         <div className="space-y-6">
-          {brew_logs.map((brew_log, i) => (
-            <RecentBrewLogCard
-            key={i}
-            roaster={brew_log.bean?.roaster?.name ?? 'Unknown Roaster'}
-            bean={brew_log.bean?.name ?? 'Unknown Bean'}
-            slug={brew_log.bean?.slug ?? '#'}
-            content={brew_log.content}
-            user={brew_log.user_id}
-            score={typeof brew_log.score === "number" ? brew_log.score : Number(brew_log.score)}
-          />
-          ))}
+          <RoasterSlider roasters={discover_roasters.map(roaster => ({
+            slug: roaster.slug,
+            logo_url: roaster.logo_url,
+            name: roaster.name,
+            location: roaster.location
+          }))} />
         </div>
       </section>
-
-
     </div>
-    
-    
   </main>
   )
 }

@@ -56,6 +56,7 @@ export async function fetchBeansofTheMonth(): Promise<Bean[]> {
         created_at
       )
     `)
+    .limit(5);
 
   if (error) {
     console.error('Supabase fetch error:', error.message)

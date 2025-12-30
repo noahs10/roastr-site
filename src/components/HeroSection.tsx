@@ -16,7 +16,7 @@ export default function HeroSection() {
   }
 
   return (
-    <section id="hero-section" className="relative bg-black text-white px-6 py-8 md:py-16 text-center">
+    <section id="hero-section" className="relative bg-black text-white px-6 py-6 md:py-16 text-center">
 
       {/* Sidebar trigger in top-left */}
       <div className="absolute top-3 left-4">
@@ -30,7 +30,7 @@ export default function HeroSection() {
 
       {/* Subtitle */}
       <p className="text-xs md:text-lg text-gray-300 max-w-xl mx-auto mb-4 md:mb-8 leading-relaxed">
-        Explore Indo&apos;s best specialty coffee, and share your Brew! <br className="md:hidden" />
+        Explore and Share Indo&apos;s best specialty coffee! <br className="md:hidden" />
       </p>
 
       {/* Search Input */}
@@ -46,19 +46,22 @@ export default function HeroSection() {
         />
       </form>
 
-      {/* Review count */}
-      <p className="text-xs md:text-sm text-gray-400 mb-1">
-        <span className="font-semibold text-white">3561</span> brew logs by coffee lovers like you
-      </p>
+     
 
       {/* CTA */}
-      <p className="text-xs md:text-sm text-gray-300 mt-5 mb-3">Brewed something special?</p>
+      <p className="text-xs md:text-sm text-gray-300 mt-3 mb-3">Tried something special?</p>
       <Link
         href="/submit"
         className="bg-white text-black border border-black active:scale-95 transition-transform duration-150 active:bg-gray-800 focus:ring-2 focus:ring-blue-400 hover:border-white hover:bg-black hover:text-white px-3 py-1.5 rounded-md text-sm font-semibold transition-color"
       >
-        ✍️ Write a review
+        ✍️ post a roastr
       </Link>
+
+       {/* Review count */}
+      <p className="text-xs md:text-sm text-gray-400 mt-3">
+        <span className="font-semibold text-white">125</span> brew logs by coffee lovers like you
+      </p>
+
     </section>
   )
 }
