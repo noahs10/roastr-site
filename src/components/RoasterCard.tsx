@@ -10,7 +10,7 @@ export type RoasterCardProps = {
 
 export default function RoasterCard({ slug, logo_url, name, location }: RoasterCardProps) {
   return (
-    <Link href={`/roasters/${slug}`} className="inline-block active:scale-95 transition-transform duration-150 ease-in-out">
+    <Link href={`/roasters/${slug}`} className="font-mono inline-block active:scale-95 transition-transform duration-150 ease-in-out">
       <div
         className="border border-gray-200 rounded-2xl p-4 flex flex-col items-center hover:border-neutral-900 hover:shadow-md transition-all"
       >

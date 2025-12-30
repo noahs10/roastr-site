@@ -38,12 +38,12 @@ export default function BeanCard({
 
   return (
 
-    <Link href={`/bean/${slug}`} className="inline-block active:scale-95 transition-transform duration-150 ease-in-out">
+    <Link href={`/bean/${slug}`} className="font-mono inline-block active:scale-95 transition-transform duration-150 ease-in-out">
       <div
         className="
-          min-w-[120px] max-w-[150px] h-[220px]
+          min-w-[150px] max-w-[150px] h-[220px]
           sm:min-w-[200px] sm:max-w-[220px] sm:h-[300px]
-          rounded-2xl border border-gray-200 bg-white
+          rounded-2xl border border-gray-300 bg-white
           shadow-sm overflow-hidden flex flex-col
           hover:border-neutral-900 hover:shadow-md transition-all duration-200
         "
